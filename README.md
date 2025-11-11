@@ -1,0 +1,49 @@
+# Calendar Project with Chatbot
+
+A small Python calendar application with a built-in rule-based chatbot interface.
+
+Features
+- SQLite-backed calendar storage
+- Simple rule-based chatbot for adding/listing/removing events
+- CLI interactive chat loop
+
+Quick start
+
+1. Create a virtual environment and install requirements:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+2. Run the chat CLI:
+
+```powershell
+python main.py
+```
+
+Example commands to type to the chatbot:
+- add Meeting with Bob on 2025-11-20 at 14:00
+- list
+- list on 2025-11-20
+- remove 1
+- help
+
+Project structure
+- `calendar_app/` — package with DB, calendar logic and chatbot
+- `main.py` — interactive chat CLI
+- `tests/` — unit tests
+
+See the code for more details.
+
+GUI
+
+There is a simple Tkinter GUI available. To run it:
+
+```powershell
+cd 'f:/Project Test/calendar_project'
+python main_gui.py
+```
+
+The GUI provides a conversation area and an input box. It uses the same rule-based chatbot as the CLI.
