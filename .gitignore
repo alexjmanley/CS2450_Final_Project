@@ -1,0 +1,78 @@
+# =========================
+# OS-SPECIFIC FILES
+# =========================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# =========================
+# EDITORS & IDEs
+# =========================
+
+# VS Code
+.vscode/
+
+# JetBrains (PyCharm, IntelliJ, etc.)
+.idea/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim / Emacs
+*.swp
+*.swo
+*.tmp
+*.bak
+*~
+
+# =========================
+# LANGUAGE / TOOL SPECIFIC
+# (Add as needed)
+# =========================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv
+
+# C / C++ / compiled
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# =========================
+# MISC
+# =========================
+.env.local
+.env.*
+!.env.example
