@@ -1,4 +1,10 @@
 import unittest
+import os
+import sys
+
+# Ensure repository root is on sys.path so tests can be run by executing the
+# file directly (e.g. `python tests/test_calendar.py`) without ModuleNotFoundError
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import tempfile
 import os
 
