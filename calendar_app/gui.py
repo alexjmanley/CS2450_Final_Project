@@ -87,8 +87,18 @@ class CalendarView:
     calendar_obj must implement list_events(date: Optional[str]) -> List[Dict]
     where date is an ISO YYYY-MM-DD prefix.
     """
+    _instance = None 
+
+    def __new__(cls, parent, calendar_obj):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def __init__(self, parent, calendar_obj):
+        if getattr(self, "_initialized", False):
+            return
+        self._initialized = True
+
         self.parent = parent
         self.calendar = calendar_obj
         today = date.today()
