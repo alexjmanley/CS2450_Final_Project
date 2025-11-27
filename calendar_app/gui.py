@@ -38,7 +38,7 @@ class ChatGUI:
         self.root.grid_columnconfigure(0, weight=1)
 
         # welcome message
-        self._append_bot("Hello — I'm your calendar assistant. Type 'help' for commands.")
+        self._append_bot("Hello — I'm your calendar assistant.")
         self.entry.focus()
 
     def _append(self, who: str, text: str):

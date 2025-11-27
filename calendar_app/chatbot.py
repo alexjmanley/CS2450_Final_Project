@@ -1,4 +1,7 @@
 import re
+import requests
+import json 
+
 from typing import Tuple
 
 from .calendar import Calendar
@@ -7,7 +10,7 @@ from .calendar import Calendar
 class ChatBot:
     def __init__(self, calendar: Calendar):
         self.calendar = calendar
-
+    '''
     def respond(self, text: str) -> str:
         text = text.strip()
         if not text:
@@ -24,6 +27,31 @@ class ChatBot:
             return self._handle_remove(text)
 
         return "Sorry, I didn't understand. Type 'help' for examples."
+    '''
+    def ask_llm(self, prompt: str) -> str:
+        url = "http://localhost:11434/api/generate"
+        headers = {"Content-Type": "application/json"}
+        data = {"model": "llama3.2:1b", "prompt": prompt, "stream": True}
+
+        response = requests.post(url, headers=headers, json=data, stream=True)
+
+        output = ""
+        for line in response.iter_lines():
+            if line:
+                try:
+                    obj = json.loads(line.decode("utf-8"))
+                    output += obj.get("response", "")
+                except json.JSONDecodeError:
+                    continue
+
+        print(output)
+        return output
+
+    def respond(self, text: str) -> str:
+        text = text.strip()
+        reply = self.ask_llm(text)
+
+        return reply 
 
     def _help_text(self) -> str:
         return (
