@@ -29,9 +29,35 @@ class ChatBot:
         return "Sorry, I didn't understand. Type 'help' for examples."
     '''
     def ask_llm(self, prompt: str) -> str:
+        prompt_for_llama = """
+        You are an assistant inside a python calendar app. Always respond with valid JSON in the following format:
+        {
+            "type": "chat" | "function_call",
+            "message": "<message for user>",
+            "function": "<function name or null>",
+            "arguments": { ... } 
+        }
+
+        - Use type "chat" if the user is just chatting.
+        - use type "function_call" if the user wants an action. 
+        - Never output anything outside JSON. 
+
+        Available functions: 
+            1. add_event 
+                description: Adds calendar event to calendar 
+                arguments: 
+                    - title (string): the title of the event
+                    - when (string): YYYY-MM-DD [at HH:MM] 
+            2. list_events
+                description: Lists events on a date 
+                arguments;
+                    - date (string): YYYY-MM-DD
+            3. list_events 
+                description: List events, if no date argument default to nothing and the app will show default
+        """
         url = "http://localhost:11434/api/generate"
         headers = {"Content-Type": "application/json"}
-        data = {"model": "llama3.2:1b", "prompt": prompt, "stream": True}
+        data = {"model": "llama3.2:1b", "prompt": prompt_for_llama + "\nUser: " + prompt, "stream": True}
 
         response = requests.post(url, headers=headers, json=data, stream=True)
 
