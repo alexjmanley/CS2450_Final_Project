@@ -29,31 +29,18 @@ class ChatBot:
         return "Sorry, I didn't understand. Type 'help' for examples."
     '''
     def ask_llm(self, prompt: str) -> str:
-        prompt_for_llama = """
-        You are an assistant inside a python calendar app. Always respond with valid JSON in the following format:
-        {
-            "type": "chat" | "function_call",
-            "message": "<message for user>",
-            "function": "<function name or null>",
-            "arguments": { ... } 
-        }
+        prompt_for_llama = """ 
+        - You are a helpful chatbot inside a calendar application
+        - Always respond in three sentences or less 
 
-        - Use type "chat" if the user is just chatting.
-        - use type "function_call" if the user wants an action. 
-        - Never output anything outside JSON. 
-
-        Available functions: 
-            1. add_event 
-                description: Adds calendar event to calendar 
-                arguments: 
-                    - title (string): the title of the event
-                    - when (string): YYYY-MM-DD [at HH:MM] 
-            2. list_events
-                description: Lists events on a date 
-                arguments;
-                    - date (string): YYYY-MM-DD
-            3. list_events 
-                description: List events, if no date argument default to nothing and the app will show default
+        Available commands the user can enter: 
+            Commands:\n
+            - add <title> on YYYY-MM-DD [at HH:MM]\n
+              e.g. add Team meeting on 2025-11-20 at 14:00\n
+            - list\n
+            - list on YYYY-MM-DD\n
+            - remove <id> 
+            - help
         """
         url = "http://localhost:11434/api/generate"
         headers = {"Content-Type": "application/json"}
@@ -69,15 +56,29 @@ class ChatBot:
                     output += obj.get("response", "")
                 except json.JSONDecodeError:
                     continue
-
-        print(output)
+        
         return output
 
     def respond(self, text: str) -> str:
         text = text.strip()
-        reply = self.ask_llm(text)
+        
 
-        return reply 
+        text = text.strip()
+        if not text:
+            return "I didn't get that. Type 'help' for commands."
+
+        low = text.lower()
+        if low.startswith("help"):
+            return self._help_text()
+        if low.startswith("add "):
+            return self._handle_add(text[4:].strip())
+        if low.startswith("list"):
+            return self._handle_list(text[4:].strip())
+        if low.startswith("remove") or low.startswith("delete"):
+            return self._handle_remove(text)
+        
+        reply = self.ask_llm(text)
+        return reply
 
     def _help_text(self) -> str:
         return (
