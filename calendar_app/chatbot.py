@@ -10,24 +10,7 @@ from .calendar import Calendar
 class ChatBot:
     def __init__(self, calendar: Calendar):
         self.calendar = calendar
-    '''
-    def respond(self, text: str) -> str:
-        text = text.strip()
-        if not text:
-            return "I didn't get that. Type 'help' for commands."
 
-        low = text.lower()
-        if low.startswith("help"):
-            return self._help_text()
-        if low.startswith("add "):
-            return self._handle_add(text[4:].strip())
-        if low.startswith("list"):
-            return self._handle_list(text[4:].strip())
-        if low.startswith("remove") or low.startswith("delete"):
-            return self._handle_remove(text)
-
-        return "Sorry, I didn't understand. Type 'help' for examples."
-    '''
     def ask_llm(self, prompt: str) -> str:
         prompt_for_llama = """ 
         - You are a helpful chatbot inside a calendar application
@@ -77,7 +60,11 @@ class ChatBot:
         if low.startswith("remove") or low.startswith("delete"):
             return self._handle_remove(text)
         
-        reply = self.ask_llm(text)
+        try:
+            reply = self.ask_llm(text)
+        except: 
+            reply = "Sorry, I didn't understand. Type 'help' for examples.f"
+
         return reply
 
     def _help_text(self) -> str:
