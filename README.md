@@ -34,7 +34,7 @@ then run
 ollama pull llama3.2:1b
 ```
 
-2. Run the chat CLI:
+3. Run the chat CLI:
 
 ```powershell
 python main.py
