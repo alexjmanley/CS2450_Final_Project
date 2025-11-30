@@ -18,6 +18,22 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+2. Download Ollama with llama3.2:1b 
+
+linux / macOS install
+```powershell
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3.2:1b
+```
+
+Windows install
+Download the Windows installer from the official website:
+https://ollama.com/download
+then run 
+```powershell
+ollama pull llama3.2:1b
+```
+
 2. Run the chat CLI:
 
 ```powershell
