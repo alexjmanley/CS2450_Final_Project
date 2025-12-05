@@ -2,6 +2,10 @@
 
 A small Python calendar application with a built-in rule-based chatbot interface.
 
+## Team Members
+- **Alex Manley** (alexjmanley)
+- **Jonah Hoff** (JonahHoff78)
+
 ## Features
 - SQLite-backed calendar storage
 - Simple rule-based chatbot for adding/listing/removing events
@@ -10,7 +14,13 @@ A small Python calendar application with a built-in rule-based chatbot interface
 
 ## Quick start
 
-1. Create a virtual environment and install requirements:
+1. Install Python dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+Or with a virtual environment (recommended):
 
 ```powershell
 python -m venv .venv
@@ -34,7 +44,13 @@ then run
 ollama pull llama3.2:1b
 ```
 
-3. Run the chat CLI:
+3. Run the GUI application:
+
+```powershell
+python main_gui.py
+```
+
+Or run the chat CLI:
 
 ```powershell
 python main.py
@@ -52,13 +68,3 @@ Example commands to type to the chatbot:
 - `main.py` — interactive chat CLI
 - `main_gui.py` — Tkinter GUI interface
 - `tests/` — unit tests
-
-## GUI
-
-There is a simple Tkinter GUI available. To run it:
-
-```powershell
-python main_gui.py
-```
-
-The GUI provides a conversation area and an input box. It uses the same rule-based chatbot as the CLI.
